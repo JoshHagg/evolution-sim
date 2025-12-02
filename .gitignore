@@ -1,12 +1,12 @@
 # Python
 __pycache__/
 *.pyc
-venv/
+sim_backend/venv/
 
 # Node
-node_modules/
-dist/
-build/
+viewer/node_modules/
+viewer/dist/
+viewer/build/
 
 # Logs
 *.log

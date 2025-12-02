@@ -1,10 +1,11 @@
- Evolution Simulator
+# Evolution Simulator
 
-A project exploring emergent evolution using:
+### Project Structure
+
+
+### Description
+A long-term simulation experiment with:
 - neural-network-driven agents
-- speciation through genome divergence
-- dynamic biomes
-- continuous evolution
-- frontend visualization
-
-## Project Structure
+- speciation and evolution
+- dynamic world conditions  
+- real-time visualisation  
