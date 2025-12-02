@@ -1,5 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
+from simulation import Simulation
+
+sim = Simulation()
 
 app = FastAPI()
 
@@ -11,9 +15,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/world")
+def get_world():
+    return sim.tick()
+
 @app.get("/")
 def root():
-    return {"message": "root works"}
+    return RedirectResponse(url="/world")
 
 @app.get("/ping")
 def ping():
