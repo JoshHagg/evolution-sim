@@ -4,15 +4,23 @@ class Agent:
         self.id = id
         self.x = x
         self.y = y
-        self.energy = 50  # temporary MVP energy
+        self.energy = 5000  # temporary MVP energy
 
     # update logic (random movement for MVP)
     def update(self):
         import random
 
-        # move randomly by -1, 0, or +1
-        self.x += random.choice([-1, 0, 1])
-        self.y += random.choice([-1, 0, 1])
+        dx = random.uniform(-1, 1)
+        dy = random.uniform(-1, 1)
+
+        self.x += dx
+        self.y += dy
+
+
+        self.x = max(0, min(self.x, 99))
+        self.y = max(0, min(self.y, 99))
 
         # energy drain
-        self.energy -= 1
+        move_cost = (abs(dx) + abs(dy)) * 0.2
+        self.energy -= (1 + move_cost)
+

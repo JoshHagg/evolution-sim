@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import * as PIXI from "pixi.js";
 
+const lastPositions = {};
+
 export default function Viewer() {
   const containerRef = useRef(null);
 
@@ -30,15 +32,48 @@ function renderWorld(world) {
 
   app.stage.removeChildren();
 
+  // Draw food
+if (world.food) {
+  world.food.forEach(f => {
+    const g = new PIXI.Graphics();
+    g.beginFill(0xffcc00); // yellow food color
+
+    const sx = f.x * scale;
+    const sy = f.y * scale;
+
+    g.drawCircle(sx, sy, 3 * scale);
+    g.endFill();
+
+    app.stage.addChild(g);
+  });
+}
+
   // Draw agents
   world.agents.forEach(a => {
+    // If we have no previous position, initialize it
+  if (!lastPositions[a.id]) {
+    lastPositions[a.id] = { x: a.x, y: a.y };
+  }
+
+  // Previous position
+  const prev = lastPositions[a.id];
+
+  // Lerp factor (controls smoothness)
+  const lerp = 0.3;
+
+  // Interpolated position
+  const ix = prev.x + (a.x - prev.x) * lerp;
+  const iy = prev.y + (a.y - prev.y) * lerp;
+
+  // Convert to screen space
+  const sx = ix * scale;
+  const sy = iy * scale;
+
+  // Update cache
+  lastPositions[a.id] = { x: ix, y: iy };
+
     const g = new PIXI.Graphics();
     g.beginFill(0x00ff00);
-
-    // Scale world → screen
-    const sx = a.x * scale;
-    const sy = a.y * scale;
-
     g.drawCircle(sx, sy, 4 * scale); 
     g.endFill();
 
