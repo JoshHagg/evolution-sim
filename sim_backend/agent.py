@@ -21,6 +21,6 @@ class Agent:
         self.y = max(0, min(self.y, 99))
 
         # energy drain
-        move_cost = (abs(dx) + abs(dy)) * 0.2
-        self.energy -= (1 + move_cost)
+        moveCost = (abs(dx) + abs(dy)) * 0.2
+        self.energy -= (1 + moveCost)
 
