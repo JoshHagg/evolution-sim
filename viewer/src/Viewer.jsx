@@ -77,7 +77,7 @@ if (world.food) {
   lastPositions[a.id] = { x: ix, y: iy };
 
     const g = new PIXI.Graphics();
-    g.beginFill(0x00ff00);
+    g.beginFill(a.colour);
     g.drawCircle(sx, sy, 6); 
     g.endFill();
 
