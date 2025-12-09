@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div
-      style={{ fontFamily: "sans-serif", width: "100vw", height: "100vh", margin: 0, padding: 0, display: "flex", flexDirection: "column",}}
+      style={{ fontFamily: "sans-serif", width: "100vw", height: "100vh", margin: 0, padding: 0, display: "flex", flexDirection: "column", overflow: "hidden"}}
     >{/* Header */}
     <div style={{ padding: 10, background: "#222", color: "white" }}>
       <h1 style={{ margin: 0 }}>Evolution Simulator Viewer</h1>
@@ -21,7 +21,7 @@ function App() {
     </div>
 
     {/* Viewer takes ALL remaining space */}
-    <div style={{ flexGrow: 1, minHeight: 0 }}>
+    <div style={{ flexGrow: 1, minHeight: 0, overflow: "hidden" }}>
       <Viewer />
     </div>
     </div>

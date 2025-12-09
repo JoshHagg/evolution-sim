@@ -1,7 +1,7 @@
 from agent import Agent
 import random
 
-foodEnergy = 2000   # MVP value, tweak later
+foodEnergy = 400   # MVP value, tweak later
 targetFood = 20  # MVP value, tweak later
 
 # world data + simulation management
@@ -56,7 +56,7 @@ class World:
 
         newAgents = []
         for agent in self.agents:
-            reproductionThreshold = 7000
+            reproductionThreshold = 1400
 
             if agent.energy > reproductionThreshold:
                 agent.energy /= 2  # parent keeps half

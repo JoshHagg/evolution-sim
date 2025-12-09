@@ -7,11 +7,13 @@ export default function Viewer() {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    if (!containerRef.current) return;
+
     // Create Pixi app
     const app = new PIXI.Application({
       background: "#111",
       antialias: true,
-      resizeTo: window,
+      resizeTo: containerRef.current,
     });
 
     containerRef.current.appendChild(app.view);
@@ -21,8 +23,8 @@ function renderWorld(world) {
   const worldW = 100;
   const worldH = 100;
 
-  const screenW = app.renderer.width;
-  const screenH = app.renderer.height;
+  const screenW = app.view.width;
+  const screenH = app.view.height;
 
   const scaleX = screenW / worldW;
   const scaleY = screenH / worldH;
@@ -83,6 +85,19 @@ if (world.food) {
 
     app.stage.addChild(g);
   });
+// Draw world border
+  const border = new PIXI.Graphics();
+border.lineStyle(4, 0xff0000); // red outline
+
+border.drawRect(
+    offsetX,
+    offsetY,
+    worldW * scale,
+    worldH * scale
+);
+
+app.stage.addChild(border);
+
 }
 
 
@@ -108,7 +123,7 @@ if (world.food) {
   return (
     <div
       ref={containerRef}
-      style={{ width: "100%", height: "100%", overflow: "hidden" }}
+      style={{ width: "100vw", height: "100vh",margin: 0, padding:0, overflow: "hidden" }}
     />
   );
 }
